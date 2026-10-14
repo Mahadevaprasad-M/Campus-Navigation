@@ -4,7 +4,7 @@
  * COLLEGE: Government Engineering College, Chamarajanagar
  * PURPOSE: All the interactive behaviour of the page:
  *
- *   1. Reads the current location from the URL (/loc/entrance)
+ *   1. Reads the current location from the URL (/loc/entrance or ?loc=)
  *   2. Fetches the list of locations from /api/locations
  *   3. Fills the dropdown and search box
  *   4. Fetches the route from /api/path when the user clicks Find Route
@@ -12,7 +12,6 @@
  *   6. Reads the steps aloud with the Web Speech API
  *   7. Toggles between English and Kannada
  *   8. Emergency button -> route to nearest gate
- *   9. Shows open/closed badge using the "hours" field
  *
  * DEPENDS ON: map.js (uses window.MapRenderer)
  * ===================================================================== */
@@ -26,20 +25,13 @@
 
   /* -----------------------------------------------------------------
    * 1. CONFIGURATION
+   * -----------------------------------------------------------------
+   * The backend URL is set in index.html via window.API_BASE.
+   * We strip any trailing slashes so we never produce "//api/...".
    * ----------------------------------------------------------------- */
-
-  // The backend URL is set in index.html via window.API_BASE.
-  // If it is not set, we fall back to an empty string, which means
-  // "use the same origin" (works for local development).
-  //
-  // IMPORTANT: we strip any trailing slashes. Otherwise a URL like
-  // "https://example.com/" would produce "https://example.com//api/..."
-  // and the server would return 400 Bad Request.
   var API_BASE = "";
   if (window.API_BASE) {
     API_BASE = window.API_BASE;
-
-    // Remove any trailing "/" from the URL.
     while (API_BASE.length > 0
         && API_BASE.charAt(API_BASE.length - 1) === "/") {
       API_BASE = API_BASE.substring(0, API_BASE.length - 1);
@@ -230,40 +222,77 @@
   /* -----------------------------------------------------------------
    * 7. READ CURRENT LOCATION FROM URL
    * -----------------------------------------------------------------
-   *   /loc/entrance   -> "entrance"
-   *   ?loc=library    -> "library"   (fallback)
-   *   ?from=canteen   -> "canteen"   (fallback)
+   * Supports all these URL shapes:
+   *
+   *   /loc/entrance              ->  "entrance"
+   *   /loc/entrance/             ->  "entrance"
+   *   /?loc=library              ->  "library"
+   *   /?from=canteen             ->  "canteen"
+   *
+   * Then cleans the id:
+   *   - Decodes any URL-encoded characters (%20, %0A, etc.)
+   *   - Removes ALL whitespace (spaces, tabs, newlines)
+   *   - Converts to lowercase
+   *
+   * This makes the app work even if the QR scanner appends a
+   * trailing newline, or if the URL has mixed case.
    * ----------------------------------------------------------------- */
   function readLocationFromUrl() {
 
-    var path = window.location.pathname;
+    var rawId = null;
 
-    // Check for /loc/<id>
+    // ---- Try to find /loc/<id> in the path first ----
+    var path = window.location.pathname;
     var marker = "/loc/";
     var markerIndex = path.indexOf(marker);
+
     if (markerIndex >= 0) {
-      var id = path.substring(markerIndex + marker.length);
-      // Remove any trailing slash.
-      if (id.charAt(id.length - 1) === "/") {
-        id = id.substring(0, id.length - 1);
-      }
-      if (id.length > 0) {
-        return decodeURIComponent(id);
+      rawId = path.substring(markerIndex + marker.length);
+
+      // Remove any trailing slashes.
+      while (rawId.length > 0 && rawId.charAt(rawId.length - 1) === "/") {
+        rawId = rawId.substring(0, rawId.length - 1);
       }
     }
 
-    // Fallback: check ?loc= and ?from=
-    var query = window.location.search;
-    var locFromQuery = getQueryParam(query, "loc");
-    if (locFromQuery) {
-      return locFromQuery;
-    }
-    var fromQuery = getQueryParam(query, "from");
-    if (fromQuery) {
-      return fromQuery;
+    // ---- Fallback: check ?loc= then ?from= ----
+    if (!rawId) {
+      var query = window.location.search;
+      rawId = getQueryParam(query, "loc");
+      if (!rawId) {
+        rawId = getQueryParam(query, "from");
+      }
     }
 
-    return null;
+    // ---- No id found at all ----
+    if (!rawId) {
+      return null;
+    }
+
+    // ---- Clean up the id ----
+    var cleaned = rawId;
+
+    // Decode URL-encoded characters. Wrap in try/catch because
+    // a malformed sequence like "%" alone would throw.
+    try {
+      cleaned = decodeURIComponent(cleaned);
+    } catch (e) {
+      // Ignore — we will clean it anyway.
+    }
+
+    // Remove ALL whitespace characters: spaces, tabs, newlines.
+    // The regex \s matches any whitespace character.
+    cleaned = cleaned.replace(/\s+/g, "");
+
+    // Convert to lowercase so "Entrance" and "entrance" both work.
+    cleaned = cleaned.toLowerCase();
+
+    // If nothing is left, treat it as "no id".
+    if (cleaned.length === 0) {
+      return null;
+    }
+
+    return cleaned;
   }
 
   // Very small query parser (no URLSearchParams — keep it simple).

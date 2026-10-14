@@ -18,8 +18,8 @@
       padding: 24px 16px 60px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                    Roboto, Arial, sans-serif;
-      background: #fdfbf5;
-      color: #0f172a;
+      background: #f4f4f5;
+      color: #0a0a0a;
       line-height: 1.5;
     }
 
@@ -31,12 +31,12 @@
     h1 {
       margin: 0 0 6px;
       font-size: 1.5rem;
-      color: #1d4ed8;
+      color: #0a0a0a;
     }
 
     .subtitle {
       margin: 0 0 24px;
-      color: #64748b;
+      color: #525252;
       font-size: 0.95rem;
     }
 
@@ -45,9 +45,10 @@
        ============================================================= */
     .panel {
       background: white;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
       margin-bottom: 24px;
     }
 
@@ -63,7 +64,7 @@
       display: block;
       font-size: 0.82rem;
       font-weight: 600;
-      color: #334155;
+      color: #525252;
       margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -74,19 +75,19 @@
     select {
       width: 100%;
       padding: 11px 14px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 8px;
+      border: 1px solid #d4d4d4;
+      border-radius: 10px;
       font-size: 0.95rem;
       font-family: inherit;
       background: white;
-      color: #0f172a;
+      color: #0a0a0a;
     }
 
     input:focus,
     select:focus {
       outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px #dbeafe;
+      border-color: #0a0a0a;
+      box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
     }
 
     .row {
@@ -104,12 +105,12 @@
     .btn {
       padding: 12px 22px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.95rem;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
-      transition: transform 0.08s, box-shadow 0.15s, background 0.15s;
+      transition: background 0.15s, transform 0.08s;
     }
 
     .btn:active {
@@ -117,23 +118,22 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      background: #0a0a0a;
       color: white;
-      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 6px 18px rgba(29, 78, 216, 0.4);
+      background: #262626;
     }
 
     .btn-secondary {
       background: white;
-      color: #1d4ed8;
-      border: 1.5px solid #dbeafe;
+      color: #0a0a0a;
+      border: 1px solid #d4d4d4;
     }
 
     .btn-secondary:hover {
-      background: #eff6ff;
+      background: #f4f4f5;
     }
 
     .btn-row {
@@ -145,18 +145,25 @@
 
     .hint {
       font-size: 0.82rem;
-      color: #64748b;
+      color: #525252;
       margin-top: 6px;
+    }
+
+    .hint code {
+      background: #f4f4f5;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.82rem;
     }
 
     .status {
       margin-top: 14px;
       padding: 10px 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.88rem;
-      background: #eff6ff;
-      color: #1e3a8a;
-      border: 1px solid #dbeafe;
+      background: #f4f4f5;
+      color: #0a0a0a;
+      border: 1px solid #e5e5e5;
     }
 
     .status.error {
@@ -174,17 +181,17 @@
       gap: 16px;
       background: white;
       padding: 20px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
     .qr-card {
-      border: 1.5px dashed #cbd5e1;
+      border: 1px dashed #d4d4d4;
       border-radius: 10px;
       padding: 12px;
       text-align: center;
       background: white;
-      /* Keep the whole card on the same printed page */
       page-break-inside: avoid;
       break-inside: avoid;
     }
@@ -200,14 +207,14 @@
     .qr-name {
       font-size: 0.9rem;
       font-weight: 700;
-      color: #1e3a8a;
+      color: #0a0a0a;
       margin: 0 0 2px;
       line-height: 1.25;
     }
 
     .qr-id {
       font-size: 0.72rem;
-      color: #64748b;
+      color: #525252;
       font-family: monospace;
       margin: 0 0 4px;
       word-break: break-all;
@@ -215,7 +222,7 @@
 
     .qr-url {
       font-size: 0.68rem;
-      color: #94a3b8;
+      color: #a3a3a3;
       margin: 0;
       word-break: break-all;
       line-height: 1.3;
@@ -223,7 +230,7 @@
 
     .qr-college {
       font-size: 0.65rem;
-      color: #94a3b8;
+      color: #a3a3a3;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-top: 6px;
@@ -233,7 +240,7 @@
       grid-column: 1 / -1;
       text-align: center;
       padding: 40px 20px;
-      color: #94a3b8;
+      color: #a3a3a3;
       font-size: 0.95rem;
     }
 
@@ -255,7 +262,6 @@
         max-width: 100%;
       }
 
-      /* Hide the control panel and headings on print */
       .panel,
       h1,
       .subtitle {
@@ -264,16 +270,16 @@
 
       .sheet {
         box-shadow: none;
+        border: none;
         padding: 0;
         gap: 10mm;
       }
 
       .qr-card {
-        border: 1px dashed #94a3b8;
+        border: 1px dashed #a3a3a3;
         padding: 6mm;
       }
 
-      /* The URL is too small to matter on a printout */
       .qr-url {
         display: none;
       }
@@ -284,10 +290,9 @@
 
 <div class="wrap">
 
-  <h1>🎓 Campus Navigation — QR Code Generator</h1>
+  <h1>Campus Navigation — QR Code Generator</h1>
   <p class="subtitle">
     Generate a printable A4 sheet of QR codes, one per campus location.
-    Each QR points to <code>&lt;base-url&gt;/loc/&lt;locationId&gt;</code>.
   </p>
 
   <!-- =============================================================
@@ -298,12 +303,13 @@
     <div class="field">
       <label for="base-url">Deployed Base URL</label>
       <input type="text" id="base-url"
-             placeholder="https://yourname.github.io/campus-navigation" />
+             placeholder="https://yourname.github.io/Campus-Navigation" />
       <p class="hint">
-        Examples:<br>
-        <code>http://localhost:8080</code> (local dev)<br>
-        <code>https://yourname.github.io/campus-navigation</code> (GitHub Pages)<br>
-        <code>https://campus-nav.onrender.com</code> (Render)
+        <strong>For your deployed site, use:</strong><br>
+        <code>https://mahadevaprasad-m.github.io/Campus-Navigation</code>
+      </p>
+      <p class="hint">
+        For local testing: <code>http://localhost:8080</code>
       </p>
     </div>
 
@@ -327,10 +333,10 @@
         Generate QR Codes
       </button>
       <button type="button" class="btn btn-secondary" id="print-btn">
-        🖨️ Print / Save as PDF
+        Print / Save as PDF
       </button>
       <button type="button" class="btn btn-secondary" id="download-btn">
-        ⬇️ Download All PNGs
+        Download All PNGs
       </button>
     </div>
 
@@ -359,7 +365,6 @@
   /* -----------------------------------------------------------------
    * 1. LOCATION LIST
    * Kept in sync with backend/data/locations.json.
-   * If you add a new location there, add it here too.
    * ----------------------------------------------------------------- */
   var LOCATIONS = [
     { id: "entrance",      name: "Main Entrance" },
@@ -419,8 +424,6 @@
 
   /* -----------------------------------------------------------------
    * 4. AUTO-FILL THE BASE URL
-   * If the page is opened from localhost, guess localhost.
-   * If it is opened as a file, guess localhost too.
    * ----------------------------------------------------------------- */
   if (window.location.protocol === "file:") {
     baseUrlInput.value = "http://localhost:8080";
@@ -440,6 +443,11 @@
 
   /* -----------------------------------------------------------------
    * 6. GENERATE THE QR SHEET
+   * -----------------------------------------------------------------
+   * IMPORTANT — URL FORMAT:
+   *   We use ?loc=<id> instead of /loc/<id> because GitHub Pages is
+   *   a static file server and cannot handle the /loc/<id> SPA route
+   *   without extra work. The query param format always works.
    * ----------------------------------------------------------------- */
   function onGenerate() {
 
@@ -451,7 +459,7 @@
       return;
     }
 
-    // Remove any trailing slash.
+    // Remove any trailing slashes.
     while (baseUrl.charAt(baseUrl.length - 1) === "/") {
       baseUrl = baseUrl.substring(0, baseUrl.length - 1);
     }
@@ -476,9 +484,13 @@
     for (i = 0; i < LOCATIONS.length; i++) {
 
       var loc = LOCATIONS[i];
-      var url = baseUrl + "/loc/" + loc.id;
-      var qrSrc = buildQrUrl(service, url, size);
 
+      // *** KEY CHANGE ***
+      // OLD: var url = baseUrl + "/loc/" + loc.id;
+      // NEW: uses query parameter format that works on GitHub Pages.
+      var url = baseUrl + "/?loc=" + loc.id;
+
+      var qrSrc = buildQrUrl(service, url, size);
       var card = createQrCard(loc, url, qrSrc);
 
       sheet.appendChild(card);
@@ -515,7 +527,7 @@
 
     var idLine = document.createElement("p");
     idLine.className = "qr-id";
-    idLine.textContent = "/" + loc.id;
+    idLine.textContent = "loc=" + loc.id;
     card.appendChild(idLine);
 
     var urlLine = document.createElement("p");
@@ -533,8 +545,6 @@
 
   /* -----------------------------------------------------------------
    * 8. BUILD THE QR IMAGE URL
-   * Each service has a different URL format.
-   * We URL-encode the target so special characters are safe.
    * ----------------------------------------------------------------- */
   function buildQrUrl(service, targetUrl, size) {
 
@@ -574,9 +584,6 @@
     }
   }
 
-  // Download a single QR image.
-  // We fetch it as a blob, create a temporary link, click it, then
-  // remove it. This forces the browser to save the file.
   function downloadOne(item) {
 
     fetch(item.src)
@@ -594,7 +601,6 @@
         a.click();
         document.body.removeChild(a);
 
-        // Release the object URL after a short delay.
         setTimeout(function () {
           URL.revokeObjectURL(objectUrl);
         }, 1500);
@@ -607,8 +613,6 @@
   /* -----------------------------------------------------------------
    * 10. HELPERS
    * ----------------------------------------------------------------- */
-
-  // Show a status message under the buttons.
   function showStatus(message, isError) {
     status.textContent = message;
     status.hidden = false;
@@ -619,7 +623,6 @@
     }
   }
 
-  // Remove leading and trailing spaces from a text.
   function trimSpaces(text) {
     return text.replace(/^\s+|\s+$/g, "");
   }
