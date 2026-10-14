@@ -28,12 +28,22 @@
    * 1. CONFIGURATION
    * ----------------------------------------------------------------- */
 
-  // If the backend is on a different URL (e.g. Render), we set this
-  // before app.js loads. Otherwise it is empty and we use the same
-  // origin (localhost:8080 in development).
+  // The backend URL is set in index.html via window.API_BASE.
+  // If it is not set, we fall back to an empty string, which means
+  // "use the same origin" (works for local development).
+  //
+  // IMPORTANT: we strip any trailing slashes. Otherwise a URL like
+  // "https://example.com/" would produce "https://example.com//api/..."
+  // and the server would return 400 Bad Request.
   var API_BASE = "";
   if (window.API_BASE) {
     API_BASE = window.API_BASE;
+
+    // Remove any trailing "/" from the URL.
+    while (API_BASE.length > 0
+        && API_BASE.charAt(API_BASE.length - 1) === "/") {
+      API_BASE = API_BASE.substring(0, API_BASE.length - 1);
+    }
   }
 
   // The two gates we consider as exits for the emergency button.
