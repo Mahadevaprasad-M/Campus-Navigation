@@ -1,0 +1,110 @@
+[
+  // =====================================================================
+  // CAMPUS EDGES — Government Engineering College, Chamarajanagar
+  // =====================================================================
+  // Format:  { "from": "<id>", "to": "<id>", "distance": <metres> }
+  //
+  // The graph is UNDIRECTED. Each line adds TWO edges at runtime
+  // (one in each direction), so you only write it once here.
+  //
+  // Distances are approximate walking metres (map units x 0.3).
+  // Every location in locations.json appears in at least one edge
+  // below, so the whole campus is reachable.
+  // =====================================================================
+
+  // ----- Main corridor (the long east-west path, y = 420) -----
+  { "from": "entrance",        "to": "junction1",       "distance": 50 },
+  { "from": "junction1",       "to": "junction2",       "distance": 60 },
+  { "from": "junction2",       "to": "junction3",       "distance": 60 },
+  { "from": "junction3",       "to": "gate2",           "distance": 50 },
+
+  // ----- Vertical spine (junction2 up to junction4) -----
+  { "from": "junction2",       "to": "junction4",       "distance": 55 },
+
+  // ----- Bottom-left area (near the entrance) -----
+  { "from": "entrance",        "to": "bus_stop",        "distance": 20 },
+  { "from": "entrance",        "to": "parking",         "distance": 25 },
+  { "from": "bus_stop",        "to": "parking",         "distance": 20 },
+  { "from": "parking",         "to": "sports_ground",   "distance": 30 },
+  { "from": "entrance",        "to": "sports_ground",   "distance": 60 },
+
+  // ----- Junction 1 (Central) fan-out -----
+  { "from": "junction1",       "to": "cse_dept",        "distance": 55 },
+  { "from": "junction1",       "to": "cse_bath",        "distance": 25 },
+
+  // ----- Junction 2 (Library) fan-out -----
+  { "from": "junction2",       "to": "library",         "distance": 30 },
+  { "from": "junction2",       "to": "nss_room",        "distance": 35 },
+  { "from": "junction2",       "to": "water_cooler1",   "distance": 15 },
+  { "from": "junction2",       "to": "library_bath",    "distance": 25 },
+  { "from": "junction2",       "to": "stationery",      "distance": 40 },
+
+  // ----- Junction 3 (Canteen) fan-out -----
+  { "from": "junction3",       "to": "canteen",         "distance": 30 },
+  { "from": "junction3",       "to": "water_cooler2",   "distance": 20 },
+  { "from": "junction3",       "to": "auditorium",      "distance": 45 },
+  { "from": "junction3",       "to": "stationery",      "distance": 40 },
+
+  // ----- Junction 4 (Academic) fan-out -----
+  { "from": "junction4",       "to": "cse_dept",        "distance": 35 },
+  { "from": "junction4",       "to": "ece_dept",        "distance": 35 },
+  { "from": "junction4",       "to": "principal",       "distance": 30 },
+  { "from": "junction4",       "to": "seminar_hall",    "distance": 30 },
+  { "from": "junction4",       "to": "library",         "distance": 20 },
+
+  // ----- CSE / ISE cluster -----
+  { "from": "cse_dept",        "to": "ise_dept",        "distance": 25 },
+  { "from": "cse_dept",        "to": "cse_lab1",        "distance": 20 },
+  { "from": "cse_dept",        "to": "cse_lab2",        "distance": 25 },
+  { "from": "cse_dept",        "to": "ece_dept",        "distance": 30 },
+  { "from": "ise_dept",        "to": "cse_lab2",        "distance": 20 },
+  { "from": "ise_dept",        "to": "cse_lab3",        "distance": 25 },
+  { "from": "cse_lab1",        "to": "cse_lab2",        "distance": 15 },
+  { "from": "cse_lab1",        "to": "sports_ground",   "distance": 80 },
+  { "from": "cse_lab2",        "to": "boys_hostel",     "distance": 50 },
+  { "from": "cse_lab1",        "to": "boys_hostel",     "distance": 60 },
+
+  // ----- ECE and lab cluster -----
+  { "from": "ece_dept",        "to": "cse_lab3",        "distance": 20 },
+  { "from": "ece_dept",        "to": "ece_lab",         "distance": 25 },
+  { "from": "ece_dept",        "to": "network_lab",     "distance": 25 },
+  { "from": "ece_dept",        "to": "seminar_hall",    "distance": 25 },
+
+  // ----- Admin / Principal / Exam Cell cluster -----
+  { "from": "admin_block",     "to": "exam_cell",       "distance": 20 },
+  { "from": "admin_block",     "to": "principal",       "distance": 40 },
+  { "from": "admin_block",     "to": "network_lab",     "distance": 30 },
+  { "from": "admin_block",     "to": "mech_dept",       "distance": 30 },
+  { "from": "principal",       "to": "network_lab",     "distance": 25 },
+  { "from": "principal",       "to": "library",         "distance": 40 },
+  { "from": "principal",       "to": "cse_lab3",        "distance": 35 },
+  { "from": "exam_cell",       "to": "mech_dept",       "distance": 25 },
+  { "from": "exam_cell",       "to": "mech_lab",        "distance": 30 },
+
+  // ----- Mechanical / Civil cluster -----
+  { "from": "mech_dept",       "to": "mech_lab",        "distance": 25 },
+  { "from": "mech_dept",       "to": "civil_dept",      "distance": 30 },
+  { "from": "mech_dept",       "to": "dispensary",      "distance": 30 },
+  { "from": "civil_dept",      "to": "dispensary",      "distance": 25 },
+  { "from": "civil_dept",      "to": "admin_block",     "distance": 40 },
+
+  // ----- Library / Seminar / NSS cluster -----
+  { "from": "library",         "to": "library_bath",    "distance": 15 },
+  { "from": "library",         "to": "seminar_hall",    "distance": 20 },
+  { "from": "library",         "to": "water_cooler1",   "distance": 20 },
+  { "from": "nss_room",        "to": "cse_bath",        "distance": 25 },
+  { "from": "nss_room",        "to": "library",         "distance": 30 },
+
+  // ----- Canteen / Auditorium cluster -----
+  { "from": "canteen",         "to": "auditorium",      "distance": 35 },
+  { "from": "canteen",         "to": "dispensary",      "distance": 30 },
+  { "from": "canteen",         "to": "girls_hostel",    "distance": 35 },
+  { "from": "auditorium",      "to": "girls_hostel",    "distance": 25 },
+  { "from": "auditorium",      "to": "dispensary",      "distance": 30 },
+  { "from": "girls_hostel",    "to": "dispensary",      "distance": 35 },
+
+  // ----- Utility inter-connections -----
+  { "from": "water_cooler1",   "to": "water_cooler2",   "distance": 45 },
+  { "from": "water_cooler2",   "to": "stationery",      "distance": 25 },
+  { "from": "stationery",      "to": "junction1",       "distance": 75 }
+]

@@ -1,0 +1,57 @@
+{
+  // =====================================================================
+  // CAMPUS LOCATIONS — Government Engineering College, Chamarajanagar
+  // =====================================================================
+  // Map is 800 x 600 units.
+  // Layout plan:
+  //   - Main corridor runs left-to-right at y = 420
+  //   - Academic buildings form a row at y = 250
+  //   - Labs sit above the academic row (y = 150-200)
+  //   - Facilities are on the right side
+  //   - Hostels sit at the top left and top right
+  //   - Entrance is at bottom-left, gate2 at bottom-right
+  // =====================================================================
+
+  "entrance":      { "name": "Main Entrance",              "x":  80, "y": 520, "type": "gate",     "hours": "24/7" },
+  "gate2":         { "name": "Rear Gate (Bus Stand)",      "x": 720, "y": 520, "type": "gate",     "hours": "6AM-9PM" },
+
+  "junction1":     { "name": "Central Junction",           "x": 200, "y": 420, "type": "junction" },
+  "junction2":     { "name": "Library Junction",           "x": 400, "y": 420, "type": "junction" },
+  "junction3":     { "name": "Canteen Junction",           "x": 600, "y": 420, "type": "junction" },
+  "junction4":     { "name": "Academic Junction",          "x": 400, "y": 250, "type": "junction" },
+
+  "cse_dept":      { "name": "CSE Department",             "x": 150, "y": 250, "type": "building", "hours": "8AM-6PM" },
+  "ise_dept":      { "name": "ISE Department",             "x": 150, "y": 180, "type": "building", "hours": "8AM-6PM" },
+  "ece_dept":      { "name": "ECE Department",             "x": 250, "y": 250, "type": "building", "hours": "8AM-6PM" },
+  "mech_dept":     { "name": "Mechanical Department",      "x": 550, "y": 250, "type": "building", "hours": "8AM-6PM" },
+  "civil_dept":    { "name": "Civil Department",           "x": 650, "y": 250, "type": "building", "hours": "8AM-6PM" },
+  "admin_block":   { "name": "Administrative Block",       "x": 500, "y": 150, "type": "office",   "hours": "10AM-5PM" },
+  "exam_cell":     { "name": "Examination Cell",           "x": 500, "y": 200, "type": "office",   "hours": "10AM-4PM" },
+  "principal":     { "name": "Principal's Office",         "x": 350, "y": 150, "type": "office",   "hours": "10AM-5PM" },
+
+  "cse_lab1":      { "name": "CSE Lab 1 (Programming)",    "x": 100, "y": 300, "type": "lab",      "hours": "9AM-5PM" },
+  "cse_lab2":      { "name": "CSE Lab 2 (Data Structures)","x": 100, "y": 220, "type": "lab",      "hours": "9AM-5PM" },
+  "cse_lab3":      { "name": "CSE Lab 3 (Networks)",       "x": 200, "y": 200, "type": "lab",      "hours": "9AM-5PM" },
+  "ece_lab":       { "name": "Electronics Lab",            "x": 300, "y": 200, "type": "lab",      "hours": "9AM-5PM" },
+  "mech_lab":      { "name": "Mechanical Workshop",        "x": 600, "y": 200, "type": "lab",      "hours": "9AM-4PM" },
+  "network_lab":   { "name": "Network & Server Lab",       "x": 250, "y": 150, "type": "lab",      "hours": "9AM-5PM" },
+
+  "library":       { "name": "Central Library",            "x": 350, "y": 320, "type": "building", "hours": "9AM-6PM" },
+  "canteen":       { "name": "Students' Canteen",          "x": 650, "y": 380, "type": "facility", "hours": "8AM-5PM" },
+  "auditorium":    { "name": "Main Auditorium",            "x": 700, "y": 320, "type": "building", "hours": "Event-based" },
+  "seminar_hall":  { "name": "Seminar Hall",               "x": 450, "y": 300, "type": "building", "hours": "9AM-5PM" },
+  "sports_ground": { "name": "Sports Ground",              "x": 100, "y": 550, "type": "facility", "hours": "6AM-7PM" },
+  "nss_room":      { "name": "NSS / NCC Room",             "x": 300, "y": 380, "type": "facility", "hours": "10AM-5PM" },
+
+  "library_bath":  { "name": "Washroom (near Library)",    "x": 400, "y": 340, "type": "facility", "hours": "24/7" },
+  "cse_bath":      { "name": "Washroom (CSE Block)",       "x": 180, "y": 340, "type": "facility", "hours": "24/7" },
+  "water_cooler1": { "name": "Water Cooler (Central)",     "x": 400, "y": 380, "type": "facility", "hours": "24/7" },
+  "water_cooler2": { "name": "Water Cooler (Canteen)",     "x": 550, "y": 380, "type": "facility", "hours": "24/7" },
+  "parking":       { "name": "Two-Wheeler Parking",        "x": 150, "y": 550, "type": "facility", "hours": "24/7" },
+  "bus_stop":      { "name": "College Bus Stop",           "x":  50, "y": 570, "type": "facility", "hours": "6AM-7PM" },
+
+  "boys_hostel":   { "name": "Boys' Hostel",               "x": 100, "y": 100, "type": "building", "hours": "24/7" },
+  "girls_hostel":  { "name": "Girls' Hostel",              "x": 700, "y": 100, "type": "building", "hours": "24/7" },
+  "dispensary":    { "name": "Health Centre / Dispensary", "x": 650, "y": 150, "type": "facility", "hours": "9AM-5PM" },
+  "stationery":    { "name": "Stationery & Xerox Shop",    "x": 450, "y": 480, "type": "facility", "hours": "9AM-7PM" }
+}

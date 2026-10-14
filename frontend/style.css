@@ -1,0 +1,918 @@
+/* =====================================================================
+ * FILE:    style.css
+ * PROJECT: Campus Navigation System
+ * COLLEGE: Government Engineering College, Chamarajanagar
+ * THEME:   Modern black + white + gray (minimal)
+ * LAYOUT:  Full width, mobile-first
+ * ===================================================================== */
+
+
+/* =====================================================================
+ * 1. COLOUR VARIABLES
+ * ---------------------------------------------------------------------
+ * All colours live here. Change them in one place and the whole site
+ * updates automatically.
+ * ===================================================================== */
+:root {
+  /* Backgrounds */
+  --bg:           #f4f4f5;   /* light gray page background */
+  --card:         #ffffff;   /* white card background */
+  --black:        #0a0a0a;   /* header, primary buttons */
+  --black-hover:  #262626;   /* darker on hover */
+
+  /* Text */
+  --text:         #171717;   /* main text (near black) */
+  --text-mid:     #525252;   /* secondary text */
+  --text-light:   #a3a3a3;   /* hints, placeholders */
+
+  /* Borders */
+  --border:       #e5e5e5;   /* light gray */
+  --border-mid:   #d4d4d4;   /* a bit darker */
+
+  /* Only used for start/end markers on the map */
+  --green:        #16a34a;
+  --red:          #dc2626;
+
+  /* Sizes */
+  --radius:       12px;
+  --radius-sm:    10px;
+  --gap:          16px;
+
+  /* Shadows */
+  --shadow-sm:    0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow:       0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =====================================================================
+ * 2. RESET AND BASE
+ * ===================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Noto Sans Kannada",
+               sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Anything with the `hidden` attribute disappears */
+[hidden] {
+  display: none !important;
+}
+
+
+/* =====================================================================
+ * 3. HEADER  (solid black bar, full width)
+ * ===================================================================== */
+.app-header {
+  background: var(--black);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.header-inner {
+  width: 100%;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.brand-text {
+  min-width: 0;
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-text p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #a3a3a3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lang-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.lang-btn:active {
+  transform: scale(0.94);
+}
+
+
+/* =====================================================================
+ * 4. MAIN LAYOUT  (full width)
+ * ===================================================================== */
+.app-main {
+  width: 100%;
+  padding: 20px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+
+/* =====================================================================
+ * 5. CARDS
+ * ===================================================================== */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+
+/* =====================================================================
+ * 6. CURRENT LOCATION CARD  (solid black, very bold)
+ * ===================================================================== */
+.current-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--black);
+  color: #ffffff;
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.current-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.current-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+}
+
+.current-body {
+  min-width: 0;
+  flex: 1;
+}
+
+.current-label {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a3a3a3;
+}
+
+.current-name {
+  margin: 2px 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.current-hours {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  color: #a3a3a3;
+}
+
+
+/* =====================================================================
+ * 7. DESTINATION PICKER
+ * ===================================================================== */
+.search-box {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 13px 44px 13px 42px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--card);
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--black);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg);
+  color: var(--text-mid);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear:hover {
+  background: var(--border);
+}
+
+/* Suggestions dropdown */
+.suggestions {
+  list-style: none;
+  margin: -4px 0 12px;
+  padding: 6px;
+  background: var(--card);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.suggestions li {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.suggestions li:hover {
+  background: var(--bg);
+}
+
+.sug-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.sug-type {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-mid);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.select-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+
+.dest-select {
+  width: 100%;
+  padding: 13px 40px 13px 14px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: inherit;
+  background-color: var(--card);
+  color: var(--text);
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.dest-select:focus {
+  outline: none;
+  border-color: var(--black);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
+}
+
+
+/* =====================================================================
+ * 8. BUTTONS
+ * ===================================================================== */
+.btn {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s, transform 0.08s, opacity 0.15s;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Primary = solid black */
+.btn-primary {
+  background: var(--black);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--black-hover);
+}
+
+/* Secondary = white with black border */
+.btn-secondary {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border-mid);
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+}
+
+/* Danger = white with red text/border */
+.btn-danger {
+  background: var(--card);
+  color: var(--red);
+  border: 1px solid #fecaca;
+  margin-top: 10px;
+}
+
+.btn-danger:hover {
+  background: #fef2f2;
+}
+
+/* Small round icon button (speaker) */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-mid);
+  background: var(--card);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-btn:hover {
+  background: var(--bg);
+}
+
+.icon-btn.speaking {
+  background: var(--black);
+  color: #ffffff;
+  border-color: var(--black);
+}
+
+
+/* =====================================================================
+ * 9. MAP
+ * ===================================================================== */
+.map-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #fafafa;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.map-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.map-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* --- SVG elements drawn by map.js --- */
+.map-bg {
+  fill: #fafafa;
+}
+
+.map-road {
+  stroke: #e5e5e5;
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* Every node looks the same: white circle, black border */
+.map-node {
+  fill: #ffffff;
+  stroke: #0a0a0a;
+  stroke-width: 2;
+  cursor: pointer;
+}
+
+.map-node:hover {
+  stroke-width: 3;
+}
+
+/* Start = green filled circle */
+.map-node.start {
+  fill: var(--green);
+  stroke: var(--green);
+  stroke-width: 3;
+}
+
+/* End = red filled circle */
+.map-node.end {
+  fill: var(--red);
+  stroke: var(--red);
+  stroke-width: 3;
+}
+
+.map-node.on-path {
+  stroke-width: 2.5;
+}
+
+.map-label {
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--text);
+  text-anchor: middle;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.map-path {
+  fill: none;
+  stroke: var(--black);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.map-arrow {
+  fill: var(--black);
+}
+
+/* Legend under the map */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-mid);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-start { background: var(--green); }
+.legend-end   { background: var(--red); }
+.legend-path  { background: var(--black); }
+
+
+/* =====================================================================
+ * 10. DIRECTIONS PANEL
+ * ===================================================================== */
+.directions-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.summary-item {
+  flex: 1;
+  text-align: center;
+}
+
+.summary-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border-mid);
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-mid);
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 2px;
+}
+
+/* Step list */
+.steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  position: relative;
+}
+
+/* Vertical line connecting step circles */
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 44px;
+  bottom: -6px;
+  width: 1px;
+  background: var(--border-mid);
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 3px solid var(--card);
+  box-shadow: 0 0 0 1px var(--border-mid);
+  position: relative;
+  z-index: 1;
+}
+
+/* The final step is outlined, not filled */
+.step-num.dir-arrived {
+  background: var(--card);
+  color: var(--black);
+  box-shadow: 0 0 0 2px var(--black);
+}
+
+.step-body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.step-text {
+  margin: 0;
+  font-size: 0.94rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.step-meta {
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-light);
+}
+
+.step.arrived .step-text {
+  font-weight: 700;
+}
+
+.directions-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.directions-actions .btn {
+  flex: 1;
+}
+
+
+/* =====================================================================
+ * 11. SPINNER
+ * ===================================================================== */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--black);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner-large {
+  width: 44px;
+  height: 44px;
+  border-width: 3px;
+  border-color: rgba(255, 255, 255, 0.25);
+  border-top-color: #ffffff;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* =====================================================================
+ * 12. LOADING OVERLAY
+ * ===================================================================== */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 100;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+
+/* =====================================================================
+ * 13. TOAST
+ * ===================================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 200;
+  max-width: calc(100% - 32px);
+  padding: 12px 40px 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  background: var(--black);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.toast-close {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+
+/* =====================================================================
+ * 14. FOOTER
+ * ===================================================================== */
+.app-footer {
+  width: 100%;
+  padding: 20px 24px 32px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.app-footer p {
+  margin: 4px 0;
+}
+
+.footer-small {
+  font-size: 0.72rem;
+}
+
+
+/* =====================================================================
+ * 15. FOCUS RING (for keyboard users)
+ * ===================================================================== */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+
+/* =====================================================================
+ * 16. DESKTOP LAYOUT
+ * ---------------------------------------------------------------------
+ * On wider screens the cards arrange in a 2-column grid:
+ *   Row 1: current location (full width)
+ *   Row 2: picker + map (side by side)
+ *   Row 3: directions (full width)
+ * ===================================================================== */
+@media (min-width: 900px) {
+  .app-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "current current"
+      "picker  map"
+      "dirs    dirs";
+    gap: 20px;
+    align-items: start;
+  }
+
+  .current-card                  { grid-area: current; }
+  .app-main > .card:nth-child(2) { grid-area: picker; }
+  .app-main > .card:nth-child(3) { grid-area: map; }
+  .app-main > #directions-card   { grid-area: dirs; }
+}
+
+/* Very wide screens get 3 columns */
+@media (min-width: 1400px) {
+  .app-main {
+    grid-template-columns: 360px 1fr 1fr;
+    grid-template-areas:
+      "current picker  map"
+      "dirs    dirs    dirs";
+  }
+}

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  =====================================================================
+  FILE:    campus-map.svg
+  PROJECT: Campus Navigation System
+  COLLEGE: Government Engineering College, Chamarajanagar
+
+  PURPOSE: Static reference SVG of the campus layout.
+           It shares the 800x600 coordinate space of locations.json,
+           so every building here lines up with a node on the
+           dynamic map drawn by map.js.
+
+  HOW TO VIEW:
+     - Open in any browser (double-click the file)
+     - Or embed in a report / presentation
+  =====================================================================
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 800 600"
+     width="800" height="600"
+     role="img"
+     aria-label="Campus map of Government Engineering College, Chamarajanagar">
+
+  <!-- =============================================================
+       DEFINITIONS
+       Gradients and patterns are declared once and reused by id.
+       ============================================================= -->
+  <defs>
+
+    <!-- Soft vertical gradient for the page background -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#ecfdf5"/>
+    </linearGradient>
+
+    <!-- Building fill (light blue) -->
+    <linearGradient id="bldgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#bfdbfe"/>
+    </linearGradient>
+
+    <!-- Lab fill (light purple) -->
+    <linearGradient id="labGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ede9fe"/>
+      <stop offset="100%" stop-color="#ddd6fe"/>
+    </linearGradient>
+
+    <!-- Office fill (light pink) -->
+    <linearGradient id="officeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#fce7f3"/>
+      <stop offset="100%" stop-color="#fbcfe8"/>
+    </linearGradient>
+
+    <!-- Grass pattern for lawns -->
+    <pattern id="grass" x="0" y="0" width="20" height="20"
+             patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#dcfce7"/>
+      <circle cx="6"  cy="6"  r="0.8" fill="#86efac"/>
+      <circle cx="14" cy="12" r="0.8" fill="#86efac"/>
+    </pattern>
+
+    <!-- Drop shadow filter for buildings -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.15"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+
+  <!-- =============================================================
+       BACKGROUND
+       ============================================================= -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Outer campus fence (dashed rectangle) -->
+  <rect x="20" y="20" width="760" height="560"
+        fill="none"
+        stroke="#cbd5e1"
+        stroke-width="2"
+        stroke-dasharray="8 6"
+        rx="8"/>
+
+  <!-- =============================================================
+       GREEN ZONES
+       ============================================================= -->
+
+  <!-- Sports ground (bottom-left) -->
+  <rect x="60" y="500" width="120" height="70" rx="6"
+        fill="url(#grass)" stroke="#86efac" stroke-width="1.5"/>
+  <text x="120" y="540" font-size="9" font-weight="600"
+        fill="#166534" text-anchor="middle">SPORTS GROUND</text>
+
+  <!-- Small lawn in the middle -->
+  <ellipse cx="400" cy="180" rx="60" ry="20"
+           fill="url(#grass)" stroke="#86efac" stroke-width="1" opacity="0.85"/>
+
+  <!-- Lawn near canteen -->
+  <ellipse cx="620" cy="460" rx="50" ry="18"
+           fill="url(#grass)" stroke="#86efac" stroke-width="1" opacity="0.85"/>
+
+  <!-- =============================================================
+       MAIN ROADS
+       ============================================================= -->
+
+  <!-- East-west main corridor (y = 420) -->
+  <line x1="80"  y1="420" x2="720" y2="420"
+        stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+  <line x1="80"  y1="420" x2="720" y2="420"
+        stroke="#f1f5f9" stroke-width="2" stroke-dasharray="10 8"/>
+
+  <!-- Vertical academic spine (x = 400, from y=250 to y=420) -->
+  <line x1="400" y1="250" x2="400" y2="420"
+        stroke="#e2e8f0" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Branch to CSE / ISE (left of junction4) -->
+  <line x1="200" y1="250" x2="400" y2="250"
+        stroke="#e2e8f0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Branch to Mech / Civil (right of junction4) -->
+  <line x1="400" y1="250" x2="650" y2="250"
+        stroke="#e2e8f0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Spur down to entrance -->
+  <line x1="80" y1="420" x2="80" y2="520"
+        stroke="#e2e8f0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Spur down to rear gate -->
+  <line x1="720" y1="420" x2="720" y2="520"
+        stroke="#e2e8f0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Short connector: library to junction4 -->
+  <line x1="350" y1="320" x2="400" y2="250"
+        stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- =============================================================
+       GATES
+       ============================================================= -->
+
+  <!-- Main entrance (bottom-left) -->
+  <g transform="translate(80 520)">
+    <rect x="-16" y="-8" width="32" height="16" rx="3"
+          fill="#fef3c7" stroke="#d97706" stroke-width="2"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="8" font-weight="700"
+          fill="#92400e" text-anchor="middle">GATE 1</text>
+  </g>
+
+  <!-- Rear gate (bottom-right) -->
+  <g transform="translate(720 520)">
+    <rect x="-16" y="-8" width="32" height="16" rx="3"
+          fill="#fef3c7" stroke="#d97706" stroke-width="2"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="8" font-weight="700"
+          fill="#92400e" text-anchor="middle">GATE 2</text>
+  </g>
+
+  <!-- =============================================================
+       ACADEMIC BUILDINGS  (light blue)
+       ============================================================= -->
+
+  <!-- CSE Department -->
+  <g transform="translate(150 250)">
+    <rect x="-45" y="-25" width="90" height="50" rx="5"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">CSE</text>
+  </g>
+
+  <!-- ISE Department -->
+  <g transform="translate(150 180)">
+    <rect x="-45" y="-20" width="90" height="40" rx="5"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">ISE</text>
+  </g>
+
+  <!-- ECE Department -->
+  <g transform="translate(250 250)">
+    <rect x="-40" y="-25" width="80" height="50" rx="5"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">ECE</text>
+  </g>
+
+  <!-- Mechanical Department -->
+  <g transform="translate(550 250)">
+    <rect x="-45" y="-25" width="90" height="50" rx="5"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">MECH</text>
+  </g>
+
+  <!-- Civil Department -->
+  <g transform="translate(650 250)">
+    <rect x="-40" y="-25" width="80" height="50" rx="5"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">CIVIL</text>
+  </g>
+
+  <!-- =============================================================
+       OFFICE BUILDINGS  (light pink)
+       ============================================================= -->
+
+  <!-- Administrative Block -->
+  <g transform="translate(500 150)">
+    <rect x="-50" y="-22" width="100" height="44" rx="5"
+          fill="url(#officeGrad)" stroke="#db2777" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#831843" text-anchor="middle">ADMIN BLOCK</text>
+  </g>
+
+  <!-- Examination Cell -->
+  <g transform="translate(500 200)">
+    <rect x="-40" y="-15" width="80" height="30" rx="4"
+          fill="url(#officeGrad)" stroke="#db2777" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#831843" text-anchor="middle">EXAM CELL</text>
+  </g>
+
+  <!-- Principal's Office -->
+  <g transform="translate(350 150)">
+    <rect x="-45" y="-22" width="90" height="44" rx="5"
+          fill="url(#officeGrad)" stroke="#db2777" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#831843" text-anchor="middle">PRINCIPAL</text>
+  </g>
+
+  <!-- =============================================================
+       LABS  (light purple)
+       ============================================================= -->
+
+  <!-- CSE Lab 1 -->
+  <g transform="translate(100 300)">
+    <rect x="-32" y="-16" width="64" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">CSE LAB 1</text>
+  </g>
+
+  <!-- CSE Lab 2 -->
+  <g transform="translate(100 220)">
+    <rect x="-32" y="-16" width="64" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">CSE LAB 2</text>
+  </g>
+
+  <!-- CSE Lab 3 -->
+  <g transform="translate(200 200)">
+    <rect x="-32" y="-16" width="64" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">CSE LAB 3</text>
+  </g>
+
+  <!-- Electronics Lab -->
+  <g transform="translate(300 200)">
+    <rect x="-32" y="-16" width="64" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">ECE LAB</text>
+  </g>
+
+  <!-- Mechanical Workshop -->
+  <g transform="translate(600 200)">
+    <rect x="-38" y="-16" width="76" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">MECH W/S</text>
+  </g>
+
+  <!-- Network Lab -->
+  <g transform="translate(250 150)">
+    <rect x="-38" y="-16" width="76" height="32" rx="4"
+          fill="url(#labGrad)" stroke="#7c3aed" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#4c1d95" text-anchor="middle">NET LAB</text>
+  </g>
+
+  <!-- =============================================================
+       LIBRARY AND FACILITIES
+       ============================================================= -->
+
+  <!-- Central Library (big and prominent) -->
+  <g transform="translate(350 320)">
+    <rect x="-55" y="-28" width="110" height="56" rx="6"
+          fill="url(#bldgGrad)" stroke="#1d4ed8" stroke-width="2"
+          filter="url(#dropShadow)"/>
+    <text y="-2" font-size="12" font-weight="800"
+          fill="#1e3a8a" text-anchor="middle">LIBRARY</text>
+    <text y="12" font-size="8"
+          fill="#1e40af" text-anchor="middle">9AM – 6PM</text>
+  </g>
+
+  <!-- Auditorium -->
+  <g transform="translate(700 320)">
+    <ellipse rx="42" ry="30"
+             fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+             filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">AUDIT.</text>
+  </g>
+
+  <!-- Canteen -->
+  <g transform="translate(650 380)">
+    <rect x="-42" y="-22" width="84" height="44" rx="5"
+          fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="10" font-weight="700"
+          fill="#14532d" text-anchor="middle">CANTEEN</text>
+  </g>
+
+  <!-- Seminar Hall -->
+  <g transform="translate(450 300)">
+    <rect x="-38" y="-18" width="76" height="36" rx="4"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#1e3a8a" text-anchor="middle">SEMINAR</text>
+  </g>
+
+  <!-- NSS / NCC Room -->
+  <g transform="translate(300 380)">
+    <rect x="-38" y="-16" width="76" height="32" rx="4"
+          fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="600"
+          fill="#14532d" text-anchor="middle">NSS/NCC</text>
+  </g>
+
+  <!-- =============================================================
+       HOSTELS AND DISPENSARY
+       ============================================================= -->
+
+  <!-- Boys' Hostel (top-left) -->
+  <g transform="translate(100 100)">
+    <rect x="-55" y="-30" width="110" height="60" rx="6"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="-4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">BOYS'</text>
+    <text y="8" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">HOSTEL</text>
+  </g>
+
+  <!-- Girls' Hostel (top-right) -->
+  <g transform="translate(700 100)">
+    <rect x="-55" y="-30" width="110" height="60" rx="6"
+          fill="url(#bldgGrad)" stroke="#2563eb" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="-4" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">GIRLS'</text>
+    <text y="8" font-size="10" font-weight="700"
+          fill="#1e3a8a" text-anchor="middle">HOSTEL</text>
+  </g>
+
+  <!-- Dispensary -->
+  <g transform="translate(650 150)">
+    <rect x="-38" y="-18" width="76" height="36" rx="4"
+          fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="9" font-weight="700"
+          fill="#7f1d1d" text-anchor="middle">DISPENSARY</text>
+  </g>
+
+  <!-- =============================================================
+       UTILITIES  (small markers)
+       ============================================================= -->
+
+  <!-- Washrooms (blue circles) -->
+  <circle cx="400" cy="340" r="5" fill="#0ea5e9"/>
+  <circle cx="180" cy="340" r="5" fill="#0ea5e9"/>
+
+  <!-- Water coolers (cyan circles) -->
+  <circle cx="400" cy="380" r="5" fill="#06b6d4"/>
+  <circle cx="550" cy="380" r="5" fill="#06b6d4"/>
+
+  <!-- Parking -->
+  <g transform="translate(150 550)">
+    <rect x="-40" y="-12" width="80" height="24" rx="3"
+          fill="#e5e7eb" stroke="#6b7280" stroke-width="1"
+          stroke-dasharray="3 3"/>
+    <text y="4" font-size="8" fill="#374151" text-anchor="middle">PARKING</text>
+  </g>
+
+  <!-- Bus stop -->
+  <g transform="translate(50 570)">
+    <rect x="-22" y="-10" width="44" height="20" rx="3"
+          fill="#fde68a" stroke="#d97706" stroke-width="1"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="8" font-weight="600"
+          fill="#78350f" text-anchor="middle">BUS</text>
+  </g>
+
+  <!-- Stationery shop -->
+  <g transform="translate(450 480)">
+    <rect x="-32" y="-12" width="64" height="24" rx="3"
+          fill="#dcfce7" stroke="#16a34a" stroke-width="1"
+          filter="url(#dropShadow)"/>
+    <text y="4" font-size="8" font-weight="600"
+          fill="#14532d" text-anchor="middle">STATIONERY</text>
+  </g>
+
+  <!-- =============================================================
+       COMPASS ROSE  (top-right)
+       ============================================================= -->
+  <g transform="translate(760 50)" opacity="0.7">
+    <circle r="18" fill="none" stroke="#64748b" stroke-width="1"/>
+    <polygon points="0,-14 4,0 0,14 -4,0" fill="#334155"/>
+    <polygon points="0,-14 4,0 0,0" fill="#1e293b"/>
+    <text y="-20" font-size="9" font-weight="700"
+          fill="#334155" text-anchor="middle">N</text>
+  </g>
+
+  <!-- =============================================================
+       SCALE BAR  (bottom-right)
+       ============================================================= -->
+  <g transform="translate(620 570)">
+    <line x1="0" y1="0" x2="100" y2="0"
+          stroke="#334155" stroke-width="2"/>
+    <line x1="0" y1="-4" x2="0" y2="4" stroke="#334155" stroke-width="2"/>
+    <line x1="50" y1="-4" x2="50" y2="4" stroke="#334155" stroke-width="2"/>
+    <line x1="100" y1="-4" x2="100" y2="4" stroke="#334155" stroke-width="2"/>
+    <text x="0"   y="-8" font-size="8" fill="#334155" text-anchor="middle">0</text>
+    <text x="50"  y="-8" font-size="8" fill="#334155" text-anchor="middle">50</text>
+    <text x="100" y="-8" font-size="8" fill="#334155" text-anchor="middle">100m</text>
+  </g>
+
+  <!-- =============================================================
+       TITLE  (bottom-left, subtle)
+       ============================================================= -->
+  <g transform="translate(30 595)">
+    <text x="0" y="0" font-size="9" font-weight="600"
+          fill="#94a3b8">GEC Chamarajanagar · Campus Map</text>
+  </g>
+
+</svg>
