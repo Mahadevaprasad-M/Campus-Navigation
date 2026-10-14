@@ -25,17 +25,21 @@ import java.util.concurrent.Executors;
 
 public class NavigationServer {
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 1. SETTINGS
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
 
     // Default port. If it is busy, we try 8081, 8082, ... up to 8090.
     private static final int START_PORT = 8080;
     private static final int END_PORT = 8090;
 
-    /* -----------------------------------------------------------------
-     * 2. MAIN METHOD  (program starts here)
-     * ----------------------------------------------------------------- */
+    /*
+     * -----------------------------------------------------------------
+     * 2. MAIN METHOD (program starts here)
+     * -----------------------------------------------------------------
+     */
     public static void main(String[] args) {
 
         printHeader();
@@ -68,14 +72,16 @@ public class NavigationServer {
         }
 
         // ---- Step 4: find where the frontend folder lives ----
+        // ---- Step 4: find where the frontend folder lives ----
+        // NOTE: On Render (backend-only deployment), the frontend is not
+        // present because it is hosted on GitHub Pages. So we just warn
+        // and continue — the API endpoints still work fine.
         String frontendFolder = findFrontendFolder();
         if (frontendFolder == null) {
             System.out.println();
-            System.out.println("ERROR: Could not find frontend/index.html anywhere.");
-            System.out.println("Common locations checked:");
-            System.out.println("   frontend/");
-            System.out.println("   ../frontend/");
-            return;
+            System.out.println("[!] frontend/ not found — static file serving disabled.");
+            System.out.println("    This is normal when deploying the backend only.");
+            System.out.println("    API endpoints will still work.");
         }
 
         // ---- Step 5: pick a free port ----
@@ -93,12 +99,29 @@ public class NavigationServer {
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
 
-            // Register the two handlers.
-            // IMPORTANT: /api/ must be registered BEFORE /, otherwise
-            // the "/" handler would also catch /api/ requests.
+            // Register the API handler (always available).
             server.createContext("/api/", new ApiHandler(graph));
             server.createContext("/api", new ApiHandler(graph));
-            server.createContext("/", new StaticFileHandler(frontendFolder));
+
+            // Register the static file handler only if the frontend exists.
+            // On Render we skip this because the frontend is on GitHub Pages.
+            if (frontendFolder != null) {
+                server.createContext("/", new StaticFileHandler(frontendFolder));
+            } else {
+                // Fallback for / — just tells the client this is the API server.
+                server.createContext("/", new com.sun.net.httpserver.HttpHandler() {
+                    public void handle(com.sun.net.httpserver.HttpExchange ex) throws java.io.IOException {
+                        String body = "Campus Navigation API is running.\n"
+                                + "Try /api/health or /api/path?from=entrance&to=principal\n";
+                        byte[] bytes = body.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+                        ex.getResponseHeaders().set("Content-Type", "text/plain; charset=utf-8");
+                        ex.sendResponseHeaders(200, bytes.length);
+                        java.io.OutputStream out = ex.getResponseBody();
+                        out.write(bytes);
+                        out.close();
+                    }
+                });
+            }
 
             // Simple thread pool (4 threads is plenty for a class demo).
             server.setExecutor(Executors.newFixedThreadPool(4));
@@ -133,19 +156,21 @@ public class NavigationServer {
         }
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 3. FIND DATA FOLDER
      * -----------------------------------------------------------------
      * Tries several common locations for backend/data/.
      * Returns the first folder that contains locations.json.
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static String findDataFolder() {
 
         String[] candidates = {
-            "data",                    // run from backend/
-            "backend/data",            // run from project root
-            "../backend/data",         // run from a subfolder
-            "src/backend/data"
+                "data", // run from backend/
+                "backend/data", // run from project root
+                "../backend/data", // run from a subfolder
+                "src/backend/data"
         };
 
         for (int i = 0; i < candidates.length; i++) {
@@ -158,18 +183,20 @@ public class NavigationServer {
         return null;
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 4. FIND FRONTEND FOLDER
      * -----------------------------------------------------------------
      * Same idea: try common locations, return the first that works.
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static String findFrontendFolder() {
 
         String[] candidates = {
-            "frontend",                // run from project root
-            "../frontend",             // run from backend/
-            "backend/frontend",
-            "src/frontend"
+                "frontend", // run from project root
+                "../frontend", // run from backend/
+                "backend/frontend",
+                "src/frontend"
         };
 
         for (int i = 0; i < candidates.length; i++) {
@@ -182,12 +209,14 @@ public class NavigationServer {
         return null;
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 5. PICK A FREE PORT
      * -----------------------------------------------------------------
      * Tries START_PORT, then START_PORT+1, up to END_PORT.
      * Returns -1 if none is free.
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static int pickFreePort(int startPort, int endPort) {
 
         for (int port = startPort; port <= endPort; port++) {
@@ -198,12 +227,14 @@ public class NavigationServer {
         return -1;
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 6. CHECK IF A PORT IS FREE
      * -----------------------------------------------------------------
      * A port is "free" if we can open a ServerSocket on it and
      * then close it immediately.
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static boolean isPortFree(int port) {
         java.net.ServerSocket testSocket = null;
         try {
@@ -222,9 +253,11 @@ public class NavigationServer {
         }
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 7. PRINT HEADER
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static void printHeader() {
         System.out.println();
         System.out.println("=================================================");
@@ -235,13 +268,15 @@ public class NavigationServer {
         System.out.println();
     }
 
-    /* -----------------------------------------------------------------
+    /*
+     * -----------------------------------------------------------------
      * 8. PRINT BANNER
-     * ----------------------------------------------------------------- */
+     * -----------------------------------------------------------------
+     */
     private static void printBanner(int port,
-                                    CampusGraph graph,
-                                    String frontendFolder,
-                                    String dataFolder) {
+            CampusGraph graph,
+            String frontendFolder,
+            String dataFolder) {
 
         String baseUrl = "http://localhost:" + port;
 
