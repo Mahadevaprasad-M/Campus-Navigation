@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- This is important: it makes all relative paths (style.css, app.js)
-       work correctly even when the URL is /loc/entrance or /loc/library -->
+  <!-- Important: makes relative paths (style.css, app.js) work
+       correctly even when the URL is /loc/entrance or /loc/library.
+       Note: uses "Campus-Navigation" with capitals to match the
+       GitHub repository name exactly. -->
   <base href="/Campus-Navigation/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +26,7 @@
 <body>
 
   <!-- =============================================================
-       HEADER  (blue gradient bar at the top)
+       HEADER
        ============================================================= -->
   <header class="app-header">
     <div class="header-inner">
@@ -213,13 +215,22 @@
   <footer class="app-footer">
     <p>Built by 3rd Semester CSE · GEC Chamarajanagar</p>
     <p class="footer-small">
-      <a href="/api/health" target="_blank">API Status</a> ·
+      <a href="https://campus-navigation-vtm9.onrender.com/api/health"
+         target="_blank" rel="noopener">API Status</a> ·
       <span>v2.0</span>
     </p>
   </footer>
+
+  <!-- =============================================================
+       BACKEND URL
+       -------------------------------------------------------------
+       IMPORTANT: no trailing slash at the end of the URL!
+       A trailing slash would create a double slash when app.js
+       appends "/api/locations" and the server returns 400.
+       ============================================================= -->
   <script>
-  window.API_BASE = "https://campus-navigation-vtm9.onrender.com/";
-</script>
+    window.API_BASE = "https://campus-navigation-vtm9.onrender.com";
+  </script>
 
   <!-- =============================================================
        SCRIPTS
